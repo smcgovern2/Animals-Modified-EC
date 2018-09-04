@@ -17,37 +17,9 @@ public class Main {
 
         ArrayList<Talkable> zoo = new ArrayList<>();
 
-        BufferedReader inStream = new BufferedReader(new InputStreamReader(System.in));
-
-        Scanner scanner = new Scanner(inStream);
-
-        System.out.println("What is the name of the dog?");
-
-        String name = inStream.readLine();
-
-        System.out.println("Is the dog friendly?(true/false)");
-        boolean isFriendly;
-        try {
-            isFriendly = scanner.nextBoolean();
-        } catch (Exception e) {
-            throw new Exception("Invalid input: please enter true or False");
-        }
-
-        zoo.add(new Dog(isFriendly, name));
-
-        System.out.println("What is the name of the cat?");
-
-        name = inStream.readLine();
-
-        System.out.println("How many mice has the cat killed?");
-
-
-
-
-
-        zoo.add(new Cat(9, "Anne Belly"));
-        zoo.add(new Student(19, "Joe John Johnson"));
-        //End Lines to Replace
+        zoo.add(addDog());
+        zoo.add(addCat());
+        zoo.add(addStudent());
 
         for (Talkable thing: zoo) {
             printOut(thing);
@@ -71,7 +43,63 @@ public class Main {
         outFile.fileWrite(p.getName() + "|" + p.talk());
     }
 
-    public static Cat addCat(int i, String s){
+    public static Cat addCat() throws Exception {
+        BufferedReader inStream = new BufferedReader(new InputStreamReader(System.in));
+        Scanner scanner = new Scanner(inStream);
+        int miceKilled;
 
+        System.out.println("What is the name of the cat?");
+
+        String name = inStream.readLine();
+
+        System.out.println("How many mice has the cat killed?");
+
+        try {
+             miceKilled = scanner.nextInt();
+        } catch (Exception e) {
+            throw new Exception("Invalid input: please enter an integer");
+        }
+
+        return new Cat(miceKilled, name);
+    }
+
+    public static Student addStudent() throws Exception {
+        BufferedReader inStream = new BufferedReader(new InputStreamReader(System.in));
+        Scanner scanner = new Scanner(inStream);
+        int age;
+
+        System.out.println("What is the name of the Student?");
+
+        String name = inStream.readLine();
+
+        System.out.println("How old is the student?");
+
+        try {
+            age = scanner.nextInt();
+        } catch (Exception e) {
+            throw new Exception("Invalid input: please enter an integer");
+        }
+
+        return new Student(age, name);
+    }
+
+    public static Dog addDog() throws Exception {
+        BufferedReader inStream = new BufferedReader(new InputStreamReader(System.in));
+        Scanner scanner = new Scanner(inStream);
+        boolean isFriendly;
+
+        System.out.println("What is the name of the dog?");
+
+        String name = inStream.readLine();
+
+        System.out.println("Is the dog friendly?(true/false)");
+
+        try {
+            isFriendly = scanner.nextBoolean();
+        } catch (Exception e) {
+            throw new Exception("Invalid input: please enter true or False");
+        }
+
+        return new Dog(isFriendly, name);
     }
 }
